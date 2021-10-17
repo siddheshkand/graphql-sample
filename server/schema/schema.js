@@ -1,4 +1,13 @@
 const graphql = require('graphql');
+var _ = require('lodash');
+
+var usersData = [
+    { id: '1', name: 'Bond', age: 36, profession: 'Programmer' },
+    { id: '13', name: 'Anna', age: 26, profession: 'Baker' },
+    { id: '211', name: 'Bella', age: 16, profession: 'Mechanic' },
+    { id: '19', name: 'Gina', age: 26, profession: 'Painter' },
+    { id: '150', name: 'Georgina', age: 36, profession: 'Teacher' }
+];
 
 // Create Type
 const UserType = new graphql.GraphQLObjectType({
@@ -23,6 +32,7 @@ const RootQuery = new graphql.GraphQLObjectType({
             args: { id: { type: graphql.GraphQLString } },
             resolve(parent, args) {
                 // return data from data source
+                return _.find(usersData, { id: args.id })
             },
         }
     }
